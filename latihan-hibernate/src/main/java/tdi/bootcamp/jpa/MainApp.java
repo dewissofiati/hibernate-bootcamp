@@ -48,6 +48,29 @@ public class MainApp {
 
 		return (Integer) session.save(kelas);
 	}
+	
+//	========== TAMBAH KELAS ==========
+	public static Integer simpanKelas(Session session){
+		Guru guru = new Guru();
+		guru.setIdGuru(2);
+		guru.setNamaGuru("Annisa");
+
+		WaliKelas waliKelas = new WaliKelas();
+		waliKelas.setGuru(guru);
+		waliKelas.setNamaWaliKelas("Annisa");
+		waliKelas.setIdEntry("Junior");
+		waliKelas.setTglEntry(new Timestamp(System.currentTimeMillis()));
+
+		Kelas kelas = new Kelas();
+		kelas.setNamaKelas("satu A");
+		kelas.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+		kelas.setIdEntry("percobaan");
+		kelas.setTglEntry(new Timestamp(System.currentTimeMillis()));
+		kelas.setWaliKelas(waliKelas);
+		waliKelas.setKelas(kelas);
+
+		return (Integer) session.save(kelas);
+	}
 
 //	========== TAMBAH MURID ==========
 	private static Integer simpanMurid(Session session){
@@ -126,9 +149,10 @@ public class MainApp {
 
 //		MainApp.simpanMurid(session);
 //		MainApp.simpanSemua(session);
-		MainApp.deleteMurid(session);
+// 		MainApp.deleteMurid(session);
 //		MainApp.updateKelas(session);
 //		MainApp.updateKelasLagi(session);
+		MainApp.simpanKelas(session);
 
 		session.flush();
 //===== SELECT WALI KELAS DGN HQL =====
