@@ -57,13 +57,17 @@ public class MainApp {
 		kelas.setIdEntry("testing");
 		kelas.setTglEntry(new Timestamp(System.currentTimeMillis()));
 
-		Murid murid = new Murid();
-		murid.setKelas(kelas);
-		murid.setNamaMurid("Dewi");
-		murid.setIdEntry("testing");
-		murid.setTglEntry(new Timestamp(System.currentTimeMillis()));
+		List<Murid> daftarMurid = new ArrayList<>();
+		for(int i=1; i<3; i++){
+			Murid murid = new Murid();
+			murid.setNamaMurid("RoseLy " + i);
+			murid.setTglEntry(new Timestamp(System.currentTimeMillis()));
+			murid.setKelas(kelas);
+			daftarMurid.add(murid);
+		}
+		kelas.setDaftarMurid(daftarMurid);
 
-		return (Integer) session.save(murid);
+		return (Integer) session.save(kelas);
 	}
 
 //	========== UPDATE KELAS ==========
