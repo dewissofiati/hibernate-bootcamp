@@ -94,6 +94,23 @@ public class MainApp {
 						.getResultList();
 		return new HashSet<>(ListData);
 	}
+	
+//	========== SELECT KELAS DGN HQL ========
+	private static Set<Kelas> getListKelas(Session session){
+		List<Kelas> ListData =
+				session.createQuery(" select k from Kelas k where k.idKelas = :namaKelas")
+						.setParameter("namaKelas", 104)
+						.getResultList();
+		return new HashSet<>(ListData);
+	}
+//	========== SELECT MURID DGN HQL ========
+	private static Set<Murid> getListMurid(Session session){
+		List<Murid> ListData =
+				session.createQuery(" select m from Murid m where m.idMurid = :namaMurid")
+						.setParameter("namaMurid", 105)
+						.getResultList();
+		return new HashSet<>(ListData);
+	}
 
 //	========== DELETE MURID ==========
 	private static void deleteMurid(Session session) {
@@ -114,11 +131,23 @@ public class MainApp {
 //		MainApp.updateKelasLagi(session);
 
 		session.flush();
-		//===== mengampilkan HQL =====
+//===== SELECT WALI KELAS DGN HQL =====
 		Set<WaliKelas> waliKelasSet = MainApp.getListWaliKelas(session);
 		for(Iterator iterator = waliKelasSet.iterator(); iterator.hasNext();){
 			WaliKelas waliKelas = (WaliKelas) iterator.next();
-			System.out.println("nama == " + waliKelas.getIdWaliKelas() + " : " + waliKelas.getNamaWaliKelas());
+			System.out.println("id waliKelas: " + waliKelas.getIdWaliKelas() + " , nama waliKelas: " + waliKelas.getNamaWaliKelas());
+		}
+//===== SELECT KELAS DGN HQL =====
+		Set<Kelas> kelasSet = MainApp.getListKelas(session);
+		for(Iterator iterator = kelasSet.iterator(); iterator.hasNext();){
+			Kelas kelas = (Kelas) iterator.next();
+			System.out.println("id kelas: " + kelas.getIdKelas() + " , nama kelas: " + kelas.getNamaKelas());
+		}
+//===== SELECT MURID DGN HQL =====
+		Set<Murid> muridSet = MainApp.getListMurid(session);
+		for(Iterator iterator = muridSet.iterator(); iterator.hasNext();){
+			Murid murid = (Murid) iterator.next();
+			System.out.println("id murid: " + murid.getIdMurid() + " , nama murid: " + murid.getNamaMurid());
 		}
 
 		session.close();
